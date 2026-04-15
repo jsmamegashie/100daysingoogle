@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madam Digital — 100 Days of Google</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --terracotta: #C1540A;
+    --clay: #D97C45;
+    --golden: #E8B45A;
+    --moss: #4A6741;
+    --cocoa: #3B2314;
+    --cream: #F5EDDF;
+    --sand: #E8D5B5;
+    --white: #FFFFFF;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--cocoa);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--cocoa);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .mascot-mini {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--golden);
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--white);
+  }
+
+  .brand-name span { color: var(--golden); }
+
+  .progress-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .progress-label {
+    font-size: 0.7rem;
+    color: var(--sand);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .progress-bar-wrap {
+    width: 160px;
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--terracotta), var(--golden));
+    border-radius: 10px;
+    transition: width 0.5s ease;
+  }
+
+  .progress-count {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--golden);
+    min-width: 50px;
+    text-align: right;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--cocoa) 0%, #5c3520 60%, var(--terracotta) 100%);
+    padding: 3rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(232,180,90,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--terracotta);
+    color: var(--white);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero h1 span { color: var(--golden); }
+
+  .hero-sub {
+    color: var(--sand);
+    font-size: 0.9rem;
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--golden);
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    color: var(--sand);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.1rem;
+  }
+
+  /* FILTER BAR */
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9a7560;
+    margin-right: 0.25rem;
+  }
+
+  .filter-btn {
+    border: 1.5px solid var(--sand);
+    background: transparent;
+    color: var(--cocoa);
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: white;
+  }
+
+  /* MAIN CONTENT */
+  .content {
+    padding: 1rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0 1rem;
+  }
+
+  .section-badge {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+  }
+
+  .badge-known {
+    background: var(--terracotta);
+    color: white;
+  }
+
+  .badge-hidden {
+    background: var(--moss);
+    color: white;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--cocoa);
+  }
+
+  /* TOOL CARD */
+  .tool-card {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 12px rgba(59,35,20,0.07);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .tool-card:hover {
+    box-shadow: 0 6px 24px rgba(59,35,20,0.13);
+    transform: translateY(-1px);
+  }
+
+  .tool-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    gap: 1rem;
+    user-select: none;
+  }
+
+  .tool-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .tool-info { flex: 1; }
+
+  .tool-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--cocoa);
+    margin-bottom: 0.2rem;
+  }
+
+  .tool-tagline {
+    font-size: 0.75rem;
+    color: #9a7560;
+    font-weight: 300;
+  }
+
+  .tool-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .video-count {
+    font-size: 0.7rem;
+    color: var(--terracotta);
+    font-weight: 600;
+    background: rgba(193,84,10,0.08);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .done-count {
+    font-size: 0.7rem;
+    color: var(--moss);
+    font-weight: 600;
+  }
+
+  .chevron {
+    color: var(--sand);
+    font-size: 1rem;
+    transition: transform 0.3s;
+  }
+
+  .tool-card.open .chevron { transform: rotate(180deg); }
+
+  /* VIDEOS LIST */
+  .videos-list {
+    display: none;
+    border-top: 1px solid var(--sand);
+    padding: 0.5rem 0;
+  }
+
+  .tool-card.open .videos-list { display: block; }
+
+  .video-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid rgba(232,213,181,0.4);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .video-item:last-child { border-bottom: none; }
+  .video-item:hover { background: rgba(245,237,223,0.6); }
+
+  .video-item.done { opacity: 0.6; }
+
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--sand);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .video-item.done .checkbox {
+    background: var(--moss);
+    border-color: var(--moss);
+  }
+
+  .checkmark {
+    color: white;
+    font-size: 0.7rem;
+    display: none;
+  }
+
+  .video-item.done .checkmark { display: block; }
+
+  .video-content { flex: 1; }
+
+  .video-num {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #b89a80;
+    margin-bottom: 0.2rem;
+  }
+
+  .video-hook {
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--cocoa);
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+  }
+
+  .video-desc {
+    font-size: 0.77rem;
+    color: #7a5c44;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .video-day {
+    font-size: 0.65rem;
+    color: var(--terracotta);
+    font-weight: 600;
+    flex-shrink: 0;
+    background: rgba(193,84,10,0.08);
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    margin-top: 2px;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--terracotta), var(--golden), transparent);
+    border-radius: 3px;
+    margin: 0.5rem 0 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--cocoa);
+    text-align: center;
+    padding: 2rem;
+    color: var(--sand);
+    font-size: 0.75rem;
+  }
+
+  footer span { color: var(--golden); }
+
+  @media (max-width: 600px) {
+    header { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+    .progress-container { width: 100%; }
+    .progress-bar-wrap { flex: 1; }
+    .filter-bar { padding: 1rem; }
+    .content { padding: 0.5rem 1rem 3rem; }
+    .hero { padding: 2rem 1rem 3rem; }
+    .hero-stats { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <img src="cartoon.png" alt="Madam Digital" class="mascot-mini" onerror="this.style.display='none'">
+    <div class="brand-name">Madam <span>Digital</span></div>
+  </div>
+  <div class="progress-container">
+    <span class="progress-label">Progress</span>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0 / 100</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">1 May — 8 Aug 2026</div>
+  <h1>100 Days of <span>Google</span></h1>
+  <p class="hero-sub">You already have a Gmail account. That means you have access to one of the most powerful digital toolkits on the planet — and most people don't even know it.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">100</div>
+      <div class="stat-label">Videos</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">20</div>
+      <div class="stat-label">Google Tools</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Videos Per Tool</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="doneCount">0</div>
+      <div class="stat-label">Done</div>
+    </div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" onclick="filterTools('all', this)">All Tools</button>
+  <button class="filter-btn" onclick="filterTools('known', this)">🔥 Commonly Used</button>
+  <button class="filter-btn" onclick="filterTools('hidden', this)">💎 Hidden Gems</button>
+  <button class="filter-btn" onclick="filterTools('pending', this)">⏳ Not Done</button>
+</div>
+
+<div class="content" id="mainContent"></div>
+
+<footer>
+  Built for <span>Madam Digital</span> · 100 Days of Google · Starting 1 May 2026
+</footer>
+
+<script>
+const tools = [
+  // ===== COMMONLY USED (10 tools) =====
+  {
+    id: 1, category: 'known', emoji: '📧', color: '#EA4335',
+    name: 'Gmail',
+    tagline: 'Everyone has it. Almost nobody knows all of it.',
+    videos: [
+      { day: 1, hook: "You Can Now Change Your Gmail Address — And Nobody Told You?!", desc: "Walk through the new Gmail address change feature — who qualifies, how to do it, what stays the same. This is breaking news energy." },
+      { day: 2, hook: "Stop Typing the Same Email Over and Over — Use Templates!", desc: "Gmail Templates (formerly Canned Responses) — how to enable, create, and use them. Show real-world use cases: client follow-ups, inquiry replies." },
+      { day: 3, hook: "Your Gmail Has a Snooze Button and You've Never Used It", desc: "Email snooze feature — snooze emails to come back later. Great for inbox zero lovers and procrastinators alike." },
+      { day: 4, hook: "Gmail Has a Built-In Scheduler — Stop Sending Emails at 3am", desc: "Schedule Send feature — how to schedule emails for the right time, why it matters for professional communication." },
+      { day: 5, hook: "The Gmail Feature That Will Save You From Embarrassing Yourself", desc: "Undo Send — how to set it up, max delay time, and why it's the most underrated setting in Gmail." }
+    ]
+  },
+  {
+    id: 2, category: 'known', emoji: '📁', color: '#34A853',
+    name: 'Google Drive',
+    tagline: 'More than just storage — it\'s your whole office.',
+    videos: [
+      { day: 6, hook: "Google Drive Has a HIDDEN Search Engine Inside It — Use It!", desc: "Drive's advanced search — search by file type, owner, date, size. Most people just scroll. Show them how to search like a pro." },
+      { day: 7, hook: "Stop Emailing Files Back and Forth — Share Them This Way Instead", desc: "Drive sharing settings in full detail — view only, comment, edit, restricted, anyone with link. Show the dangers of wrong settings." },
+      { day: 8, hook: "Google Drive Keeps Every Version of Your File — Here's How to Go Back in Time", desc: "Version history — how to see and restore old versions of Docs, Sheets, Slides. A lifesaver when you delete something by mistake." },
+      { day: 9, hook: "You Can Use Google Drive Without Internet — Did You Know That?", desc: "Offline mode setup for Drive — how to enable it, which files work offline, how syncing works when you reconnect." },
+      { day: 10, hook: "This Drive Trick Will Change How You Organise Everything", desc: "Starred folders, colour-coded folders, shortcuts vs copies — building a folder system that actually makes sense." }
+    ]
+  },
+  {
+    id: 3, category: 'known', emoji: '📄', color: '#4285F4',
+    name: 'Google Docs',
+    tagline: 'Word processing — but smarter than you think.',
+    videos: [
+      { day: 11, hook: "Google Docs Can Write For You — No, Seriously", desc: "Smart Compose and Smart Reply in Docs — AI-assisted writing suggestions. Show how to use it without losing your voice." },
+      { day: 12, hook: "Stop Copying and Pasting — Google Docs Has a Template Gallery Nobody Talks About", desc: "Docs template gallery — resumes, letters, meeting notes, project proposals. All free, all ready to go." },
+      { day: 13, hook: "You Can Record Your Voice Directly in Google Docs — This is a Game Changer", desc: "Voice typing in Docs — how to enable it, punctuation commands, language support. Great for content creators and students." },
+      { day: 14, hook: "Google Docs Has a Research Tool Built In — Stop Switching Tabs", desc: "Explore panel in Docs — search the web, insert citations, find related content without leaving your document." },
+      { day: 15, hook: "This Docs Feature Will Make You Look 10x More Professional", desc: "Document outline, table of contents, page setup and custom styles — making documents that look polished and intentional." }
+    ]
+  },
+  {
+    id: 4, category: 'known', emoji: '📊', color: '#0F9D58',
+    name: 'Google Sheets',
+    tagline: 'Free Excel — with AI superpowers.',
+    videos: [
+      { day: 16, hook: "Google Sheets Can Do Your Calculations FOR You — Stop Doing Them Manually", desc: "The 10 most useful Sheets formulas every non-accountant needs: SUM, IF, VLOOKUP, COUNTIF, CONCATENATE. Real examples, no jargon." },
+      { day: 17, hook: "Google Sheets Can Pull Live Data From the Internet — This Blew My Mind", desc: "IMPORTXML, IMPORTHTML, GOOGLEFINANCE — pulling live stock prices, currency rates, website data straight into your sheet." },
+      { day: 18, hook: "Turn Your Messy Data Into a Beautiful Chart in 60 Seconds", desc: "Charts and visualisations in Sheets — chart types, customisation, embedding in Docs and Slides. Make data tell a story." },
+      { day: 19, hook: "Google Sheets Has a Built-In AI — Ask It Questions About Your Data", desc: "The Explore button in Sheets — ask natural language questions, get instant charts and insights. No formula knowledge needed." },
+      { day: 20, hook: "Protect Your Google Sheet So Nobody Can Accidentally Ruin It", desc: "Sheet and range protection, locking cells, hiding formulas — especially useful for shared team spreadsheets." }
+    ]
+  },
+  {
+    id: 5, category: 'known', emoji: '📅', color: '#4285F4',
+    name: 'Google Calendar',
+    tagline: 'You schedule. But are you using it right?',
+    videos: [
+      { day: 21, hook: "Share Your Google Calendar So People Can Book You Without the Back and Forth", desc: "Google Calendar sharing and booking pages — how to share availability, set up appointment slots, and send booking links." },
+      { day: 22, hook: "Google Calendar Can Block Time For Your Focus Work — Set It Up Now", desc: "Focus time, Do Not Disturb settings, and calendar blocks for deep work. How to protect your most productive hours." },
+      { day: 23, hook: "Set Goals in Google Calendar and It Will Schedule Them For You", desc: "Google Calendar Goals feature — add a goal (exercise, read, learn), let Calendar find the best slots automatically." },
+      { day: 24, hook: "You Can Have Multiple Calendars in One — Here's Why You Should", desc: "Multiple calendars setup — personal, work, content schedule, events. Colour coding and how to layer them." },
+      { day: 25, hook: "This Calendar Trick Will Stop You From Missing Important Deadlines", desc: "Notifications, reminders, email reminders vs push notifications — customising alerts so nothing falls through the cracks." }
+    ]
+  },
+  {
+    id: 6, category: 'known', emoji: '📽️', color: '#FF0000',
+    name: 'YouTube Studio',
+    tagline: 'If you post videos, this dashboard is your HQ.',
+    videos: [
+      { day: 26, hook: "YouTube Studio Is Free Analytics Software — Are You Even Using It?", desc: "YouTube Studio analytics walkthrough — impressions, CTR, watch time, audience retention. What each number actually means for your content." },
+      { day: 27, hook: "YouTube Will Write Your Video Description For You — Use This Feature", desc: "AI-generated descriptions, auto-chapters, and auto-generated titles in YouTube Studio. Save time, look professional." },
+      { day: 28, hook: "The YouTube Feature That Tells You Exactly When to Post", desc: "Audience tab in Studio — when your viewers are online, where they're from, what else they watch. Post smarter not harder." },
+      { day: 29, hook: "You Can Post to YouTube Without Anyone Seeing It — Here's Why You Should", desc: "Unlisted vs Private vs Public — using unlisted links to share videos with clients, for courses, or for review before publishing." },
+      { day: 30, hook: "YouTube Studio Has a Copyright Check Tool — Use It Before You Post", desc: "Checks & restrictions in Studio — copyright claims, monetisation eligibility, age restrictions. What to do if you get flagged." }
+    ]
+  },
+  {
+    id: 7, category: 'known', emoji: '📝', color: '#F4B400',
+    name: 'Google Forms',
+    tagline: 'Free surveys, registrations, quizzes — unlimited.',
+    videos: [
+      { day: 31, hook: "Google Forms Is a Free Registration System — Stop Paying for Typeform", desc: "Building a full event registration form — sections, required fields, file uploads, confirmation messages. Professional and free." },
+      { day: 32, hook: "Turn Your Google Form Into a Quiz That Grades Itself", desc: "Quiz mode in Forms — answer keys, point values, automatic grading, feedback messages. Perfect for trainers and educators." },
+      { day: 33, hook: "Your Google Form Responses Go Straight to a Spreadsheet — Here's the Magic", desc: "Forms + Sheets integration — responses in real time, how to analyse them, conditional formatting for quick insights." },
+      { day: 34, hook: "Make Your Google Form Look So Good Nobody Will Believe It's Free", desc: "Form customisation — themes, header images, colour schemes, custom confirmation pages. Brand your forms properly." },
+      { day: 35, hook: "Collect Payments Through Google Forms — Yes, Really", desc: "Google Forms + PayStack or Flutterwave via Zapier/Make — building a simple payment + registration flow for events and workshops." }
+    ]
+  },
+  {
+    id: 8, category: 'known', emoji: '🗺️', color: '#34A853',
+    name: 'Google Maps',
+    tagline: 'Navigation is just the beginning.',
+    videos: [
+      { day: 36, hook: "Google Maps Can Save Locations You Haven't Been To Yet — Here's Why", desc: "Saved places, lists, and want-to-go lists in Maps — how to organise places, share lists, and use them for trip planning or client visits." },
+      { day: 37, hook: "Your Business Needs to Be on Google Maps — Here's How to Add It Free", desc: "Google Business Profile setup walkthrough — adding your business, categories, photos, hours. The basics of local SEO." },
+      { day: 38, hook: "Google Maps Tells You When Places Are Busy — Use This Before You Leave the House", desc: "Popular times, live busyness, wait times — how Maps predicts crowd levels and how to use this for planning." },
+      { day: 39, hook: "You Can Add Your Own Photos to Google Maps and Get Rewarded", desc: "Google Local Guides programme — adding photos, reviews, and edits. How points work, perks, and why it matters for your community." },
+      { day: 40, hook: "Google Maps Can Give You Street-Level Views of Places You've Never Been", desc: "Street View — exploring locations remotely, using it for business research, travel planning, and creative content." }
+    ]
+  },
+  {
+    id: 9, category: 'known', emoji: '🔍', color: '#4285F4',
+    name: 'Google Search',
+    tagline: 'You search daily. You\'re not searching right.',
+    videos: [
+      { day: 41, hook: "You've Been Using Google Wrong This Whole Time — Search Like a Pro", desc: "Advanced Google search operators — quotes for exact phrases, minus to exclude, site:, filetype:, before:/after:. Real examples." },
+      { day: 42, hook: "Google Has a Reverse Image Search and It's Incredibly Powerful", desc: "Google Lens and reverse image search — finding original sources, identifying products, checking if someone is using your images." },
+      { day: 43, hook: "Set Up Google Alerts and Let Google Do Your Research For You", desc: "Google Alerts — monitoring your name, brand, competitors, industry keywords. Free real-time intelligence delivered to your inbox." },
+      { day: 44, hook: "Google Search Has a Calculator, Unit Converter and Timer Built In", desc: "Hidden Google Search tools — quick calculations, conversions, timers, stopwatch, colour picker, and more. No extra apps needed." },
+      { day: 45, hook: "Find Anything on Any Website With This One Google Trick", desc: "The site: operator in detail — searching within specific websites, finding old cached pages, checking what Google has indexed of your site." }
+    ]
+  },
+  {
+    id: 10, category: 'known', emoji: '💬', color: '#00BCD4',
+    name: 'Google Meet',
+    tagline: 'Free video calls — way more capable than you know.',
+    videos: [
+      { day: 46, hook: "Google Meet Is Free for Unlimited Calls — Stop Paying for Zoom", desc: "Meet vs Zoom vs Teams — honest comparison. What you get free, limits, and when Meet is all you need." },
+      { day: 47, hook: "Google Meet Can Transcribe Your Meeting Automatically — Turn This On Now", desc: "Live captions and meeting transcripts in Meet — how to enable, where transcripts are saved, how to use them after the call." },
+      { day: 48, hook: "Present Like a Pro on Google Meet With This Background Trick", desc: "Virtual backgrounds, background blur, and visual effects in Meet. Plus how to share just one tab instead of your whole screen." },
+      { day: 49, hook: "Record Your Google Meet Call and Share It in Minutes — Here's How", desc: "Meeting recording in Meet — where recordings go (Drive), how to share, trimming before sharing, and permission settings." },
+      { day: 50, hook: "Host a Webinar for Free on Google Meet — Everything You Need to Know", desc: "Using Meet for webinars — Q&A feature, polls, breakout rooms, participant controls. Run a professional event at zero cost." }
+    ]
+  },
+
+  // ===== HIDDEN GEMS (10 tools) =====
+  {
+    id: 11, category: 'hidden', emoji: '🎨', color: '#9C27B0',
+    name: 'Google Jamboard',
+    tagline: 'A digital whiteboard most people have never opened.',
+    videos: [
+      { day: 51, hook: "Google Has a Free Digital Whiteboard and You've Never Opened It", desc: "Jamboard intro — what it is, what it looks like, where to find it. Show it being used in a real brainstorm or workshop setting." },
+      { day: 52, hook: "Run Your Next Brainstorming Session Online — Completely Free", desc: "Collaborative sticky notes, drawing tools, image insertion in Jamboard. How teams can work on the same board in real time." },
+      { day: 53, hook: "Use Jamboard for Your Next Training Workshop — Your Participants Will Love It", desc: "Jamboard for facilitators — framing exercises, participant input boards, idea sorting. Practical workshop design tips." },
+      { day: 54, hook: "Jamboard + Google Meet = The Ultimate Free Virtual Workshop Setup", desc: "Running Jamboard alongside a Meet call — sharing your Jamboard screen, managing participant contributions, saving results." },
+      { day: 55, hook: "Save and Export Your Jamboard as a PDF in Seconds — Here's How", desc: "Exporting Jamboard as PDF or image, saving frames, organising multiple boards in Drive. How to archive workshop results." }
+    ]
+  },
+  {
+    id: 12, category: 'hidden', emoji: '📰', color: '#FF6F00',
+    name: 'Google Sites',
+    tagline: 'Build a free website — no code, no hosting fees.',
+    videos: [
+      { day: 56, hook: "Google Will Host Your Website For Free — Why Is Nobody Talking About This?", desc: "Google Sites intro — what it is, what kinds of sites you can build, who it's for. Bust the myth that websites have to be expensive." },
+      { day: 57, hook: "Build Your Portfolio Website in 30 Minutes — Google Sites Tutorial", desc: "Step-by-step Sites build: pages, navigation, text, images, embedded Drive files. Publishing and sharing your site URL." },
+      { day: 58, hook: "Embed Anything From Google Into Your Website — Sheets, Forms, Slides, Maps", desc: "Google Sites' superpower — embedding live Google content. A form that updates, a sheet that's always current, a Map with your location." },
+      { day: 59, hook: "Use Google Sites to Build a Staff Intranet for Your Team — Free", desc: "Internal team sites — using Sites for a team knowledge base, onboarding hub, or internal resource portal. Real-world use case." },
+      { day: 60, hook: "Can You Actually Run a Business on a Free Google Site? Let's Find Out", desc: "Honest review of Google Sites limitations and strengths. When to use it, when to upgrade, and how to make it look professional." }
+    ]
+  },
+  {
+    id: 13, category: 'hidden', emoji: '📌', color: '#E91E63',
+    name: 'Google Keep',
+    tagline: 'Notes, reminders, lists — all linked to your Google account.',
+    videos: [
+      { day: 61, hook: "Google Has a Notes App That Syncs Everywhere — Stop Using Random Apps", desc: "Google Keep intro — notes, lists, voice memos, images. How it syncs across phone, tablet, and desktop automatically." },
+      { day: 62, hook: "Set a Location-Based Reminder on Google Keep — This is So Useful", desc: "Location reminders in Keep — remind me when I arrive at the market, when I leave the office. Practical everyday use cases." },
+      { day: 63, hook: "Send Any Google Keep Note Straight to Google Docs in One Click", desc: "Keep to Docs integration — how to export a note to a full document. Great for taking rough notes and turning them into content." },
+      { day: 64, hook: "Use Google Keep to Capture Content Ideas On the Go — My Exact System", desc: "Content creator's Keep system — labels, colour coding, pinning, shared notes for collaboration. How Madam Digital uses it." },
+      { day: 65, hook: "Collaborate on a Shopping List or Project With Google Keep", desc: "Shared Keep notes — adding collaborators, real-time updates, use cases for couples, teams, and event planning." }
+    ]
+  },
+  {
+    id: 14, category: 'hidden', emoji: '📊', color: '#1565C0',
+    name: 'Google Data Studio (Looker Studio)',
+    tagline: 'Turn any data into a beautiful live dashboard.',
+    videos: [
+      { day: 66, hook: "Google Built a Free Tableau — And You Can Use It Right Now", desc: "Looker Studio intro — what it is, why data people love it, how it compares to paid tools. Show a finished dashboard to hook them." },
+      { day: 67, hook: "Connect Your Google Analytics to Looker Studio and See Everything at Once", desc: "Connecting data sources — GA4, Sheets, BigQuery, Search Console. Building your first report from real data." },
+      { day: 68, hook: "Build a Client Report That Updates Itself — Looker Studio Tutorial", desc: "Live dashboards that refresh automatically. How to build a marketing report for a client or team that's always current." },
+      { day: 69, hook: "Make Your Data Dashboard Look Like It Cost Money — Free Design Tips", desc: "Looker Studio design — themes, brand colours, chart types, layout. Making dashboards that look professional and readable." },
+      { day: 70, hook: "Share a Live Dashboard With Your Client — No More Sending PDFs", desc: "Sharing Looker Studio reports — view-only links, scheduled email delivery, embedding in websites. The professional way to report." }
+    ]
+  },
+  {
+    id: 15, category: 'hidden', emoji: '🤖', color: '#00897B',
+    name: 'Google NotebookLM',
+    tagline: 'Upload anything. Ask it anything. It only uses your sources.',
+    videos: [
+      { day: 71, hook: "Google Built an AI That Only Uses YOUR Documents — This Changes Everything", desc: "NotebookLM intro — what makes it different from ChatGPT, why source-grounded AI matters, who it's for." },
+      { day: 72, hook: "Upload Your Lecture Notes and Ask NotebookLM to Quiz You", desc: "Student use case — uploading PDFs, asking comprehension questions, generating study guides and summaries from your own notes." },
+      { day: 73, hook: "NotebookLM Can Turn Your Document into a Podcast — I'm Not Joking", desc: "Audio Overview feature — NotebookLM generating a two-host podcast discussion of your document. Show the output, discuss the implications." },
+      { day: 74, hook: "Use NotebookLM to Research Any Topic Without Getting Hallucinated Facts", desc: "Research workflow — uploading multiple sources, cross-referencing, asking complex questions, getting cited answers." },
+      { day: 75, hook: "Run Your Entire Business Strategy Through NotebookLM — Here's How", desc: "Business use case — uploading brand docs, SOPs, reports, asking strategic questions. Show Madam Digital using it for her own brands." }
+    ]
+  },
+  {
+    id: 16, category: 'hidden', emoji: '🌐', color: '#0288D1',
+    name: 'Google Translate',
+    tagline: 'Way more than text translation — it\'s a language lab.',
+    videos: [
+      { day: 76, hook: "Google Translate Can Read Signs in a Foreign Language Through Your Camera", desc: "Google Lens + Translate camera mode — point your phone at text in any language and see it translated in real time. Mind-blowing demo." },
+      { day: 77, hook: "Translate an Entire Document Without Copying a Single Word", desc: "Document translation in Google Translate — upload a PDF or Word doc, get a translated version. Free, fast, keeps formatting." },
+      { day: 78, hook: "Have a Real Conversation With Someone Who Speaks a Different Language — Free", desc: "Conversation mode in Translate — two people speaking, real-time translation back and forth. Practical use cases for business and travel." },
+      { day: 79, hook: "Google Translate Works Offline — Download These Languages Now", desc: "Offline translation packs — which languages are available, how to download, how it works without data. Essential travel tip." },
+      { day: 80, hook: "Use Google Translate to Create Multilingual Content For Your Brand", desc: "Content creator use case — translating captions, posts, scripts. Limitations to watch for, how to verify quality, when to use a human." }
+    ]
+  },
+  {
+    id: 17, category: 'hidden', emoji: '🔬', color: '#558B2F',
+    name: 'Google Scholar',
+    tagline: 'Free academic research — millions of papers at your fingertips.',
+    videos: [
+      { day: 81, hook: "You Don't Need to Pay for Research Papers — Google Scholar is Free", desc: "Google Scholar intro — what's on it, how to search, how to find free full-text versions of paid papers. Great for students and researchers." },
+      { day: 82, hook: "Set Up Google Scholar Alerts and Get New Research Delivered to You", desc: "Scholar alerts — follow topics, authors, citations. Stay updated on your field without manual searching." },
+      { day: 83, hook: "Cite Any Source Automatically With Google Scholar — No More Formatting Stress", desc: "Scholar's citation export — APA, MLA, Harvard, Chicago. Copy-paste ready citations for essays, theses, and reports." },
+      { day: 84, hook: "Find Out How Many Times a Paper Has Been Cited — And Why It Matters", desc: "Citation counts and h-index in Scholar — evaluating source credibility, finding seminal papers in any field." },
+      { day: 85, hook: "Use Google Scholar to Find Evidence for Your Content — Instantly Credible", desc: "Content creators using Scholar — backing claims with research, finding statistics, linking to studies. Build authority with evidence." }
+    ]
+  },
+  {
+    id: 18, category: 'hidden', emoji: '🛒', color: '#F57C00',
+    name: 'Google Shopping',
+    tagline: 'Compare prices across every store — for free.',
+    videos: [
+      { day: 86, hook: "Google Will Compare Prices Across Every Online Store For You — For Free", desc: "Google Shopping intro — how to access it, how to filter, how price comparison works. Never overpay for something online again." },
+      { day: 87, hook: "Set a Price Alert on Google Shopping and Buy When the Price Drops", desc: "Price tracking in Google Shopping — track products, get notified of price drops. Smart buying for consumers and resellers." },
+      { day: 88, hook: "List Your Products on Google Shopping For Free — Here's How", desc: "Google Merchant Center free listings — how small businesses and e-commerce shops can appear in Shopping results at no cost." },
+      { day: 89, hook: "Google Shopping Shows You What's In Stock Near You — Use This", desc: "Local inventory in Shopping — finding products available nearby, store pickup options. Great for urgent purchases." },
+      { day: 90, hook: "The Google Shopping Trick That Will Save You Money Every Time You Buy Online", desc: "Combining Google Shopping with cashback extensions, coupon tools, and price history — the full money-saving combo." }
+    ]
+  },
+  {
+    id: 19, category: 'hidden', emoji: '🎓', color: '#6A1B9A',
+    name: 'Google Classroom',
+    tagline: 'Run a full online course — free, no tech skills needed.',
+    videos: [
+      { day: 91, hook: "Run a Full Online Course for Free — Google Classroom Is Completely Underrated", desc: "Google Classroom intro for non-teachers — trainers, coaches, workshop facilitators. What it does, who it's for beyond schools." },
+      { day: 92, hook: "Set Up Your First Google Classroom in 10 Minutes — Step by Step", desc: "Classroom setup walkthrough — creating a class, inviting students, setting up topics and assignments. Done in one sitting." },
+      { day: 93, hook: "Assign, Collect and Grade Work — All in One Place With Google Classroom", desc: "Assignment workflow — creating tasks, attaching Drive files, collecting submissions, giving feedback and grades." },
+      { day: 94, hook: "Use Google Classroom to Deliver Your Next Paid Workshop Online", desc: "Monetisation angle — using Classroom as a course delivery platform for paid content. What it can and can't do vs Teachable/Thinkific." },
+      { day: 95, hook: "Google Classroom + Meet + Forms = Your Complete Training Platform — Free", desc: "The full Google training stack — Classroom for content, Meet for live sessions, Forms for assessments. The zero-cost alternative to LMS platforms." }
+    ]
+  },
+  {
+    id: 20, category: 'hidden', emoji: '📡', color: '#C62828',
+    name: 'Google Trends',
+    tagline: 'See what the world is searching — before everyone else does.',
+    videos: [
+      { day: 96, hook: "See What the Whole World is Searching Right Now — Google Trends is Free", desc: "Google Trends intro — real-time and historical search interest data. How to read a trends graph and what rising vs breakout means." },
+      { day: 97, hook: "Find Your Next Viral Content Idea Using Google Trends", desc: "Content strategy with Trends — finding trending topics in your niche, timing content to peak interest, comparing topic ideas." },
+      { day: 98, hook: "Use Google Trends to Spy on Your Competition — Legally", desc: "Comparing brands and keywords in Trends — see if a competitor is growing or shrinking in search interest. Strategic intelligence for free." },
+      { day: 99, hook: "Google Trends Shows You What Ghana Is Searching — Local Insights Nobody Talks About", desc: "Country and regional filtering in Trends — finding what's trending in Ghana, your city, or your specific market. Hyper-local content ideas." },
+      { day: 100, hook: "100 Days Done. Here's Everything Google Gave Us for Free.", desc: "Series wrap-up — all 20 tools recap, the biggest surprises, the most useful discoveries, what's coming next for Madam Digital." }
+    ]
+  }
+];
+
+// State
+let completed = JSON.parse(localStorage.getItem('md_completed') || '[]');
+let currentFilter = 'all';
+
+function saveState() {
+  localStorage.setItem('md_completed', JSON.stringify(completed));
+}
+
+function updateProgress() {
+  const total = 100;
+  const done = completed.length;
+  const pct = (done / total) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = done + ' / ' + total;
+  document.getElementById('doneCount').textContent = done;
+}
+
+function toggleVideo(toolId, videoIdx, el) {
+  const key = toolId + '-' + videoIdx;
+  const item = el.closest('.video-item');
+  if (completed.includes(key)) {
+    completed = completed.filter(k => k !== key);
+    item.classList.remove('done');
+  } else {
+    completed.push(key);
+    item.classList.add('done');
+  }
+  saveState();
+  updateProgress();
+  updateToolDoneCount(toolId);
+}
+
+function updateToolDoneCount(toolId) {
+  const tool = tools.find(t => t.id === toolId);
+  const doneForTool = tool.videos.filter((_, i) => completed.includes(toolId + '-' + i)).length;
+  const el = document.getElementById('done-' + toolId);
+  if (el) el.textContent = doneForTool + '/5 done';
+}
+
+function toggleCard(toolId) {
+  const card = document.getElementById('card-' + toolId);
+  card.classList.toggle('open');
+}
+
+function filterTools(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTools();
+}
+
+function renderTools() {
+  const container = document.getElementById('mainContent');
+  container.innerHTML = '';
+
+  const categories = [
+    { key: 'known', label: '🔥 Commonly Used — What You Have But Don\'t Know', badge: 'badge-known', badgeText: 'Most People Use These' },
+    { key: 'hidden', label: '💎 Hidden Gems — Tools You Didn\'t Know You Had', badge: 'badge-hidden', badgeText: 'Underrated & Powerful' }
+  ];
+
+  categories.forEach(cat => {
+    let filteredTools = tools.filter(t => t.category === cat.key);
+
+    if (currentFilter === 'known' && cat.key !== 'known') return;
+    if (currentFilter === 'hidden' && cat.key !== 'hidden') return;
+    if (currentFilter === 'pending') {
+      filteredTools = filteredTools.filter(t =>
+        t.videos.some((_, i) => !completed.includes(t.id + '-' + i))
+      );
+    }
+
+    if (filteredTools.length === 0) return;
+
+    const section = document.createElement('div');
+
+    const header = document.createElement('div');
+    header.className = 'section-header';
+    header.innerHTML = `
+      <span class="section-badge ${cat.badge}">${cat.badgeText}</span>
+      <h2 class="section-title">${cat.label}</h2>
+    `;
+    const divider = document.createElement('div');
+    divider.className = 'section-divider';
+
+    section.appendChild(header);
+    section.appendChild(divider);
+
+    filteredTools.forEach(tool => {
+      const doneForTool = tool.videos.filter((_, i) => completed.includes(tool.id + '-' + i)).length;
+
+      const card = document.createElement('div');
+      card.className = 'tool-card';
+      card.id = 'card-' + tool.id;
+
+      card.innerHTML = `
+        <div class="tool-header" onclick="toggleCard(${tool.id})">
+          <div class="tool-icon" style="background:${tool.color}22; color:${tool.color}; font-size:1.4rem;">${tool.emoji}</div>
+          <div class="tool-info">
+            <div class="tool-name">${tool.name}</div>
+            <div class="tool-tagline">${tool.tagline}</div>
+          </div>
+          <div class="tool-meta">
+            <span class="video-count">5 videos</span>
+            <span class="done-count" id="done-${tool.id}">${doneForTool}/5 done</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="videos-list">
+          ${tool.videos.map((v, i) => `
+            <div class="video-item ${completed.includes(tool.id + '-' + i) ? 'done' : ''}" id="vi-${tool.id}-${i}">
+              <div class="checkbox" onclick="toggleVideo(${tool.id}, ${i}, this)">
+                <span class="checkmark">✓</span>
+              </div>
+              <div class="video-content">
+                <div class="video-num">Video ${i + 1} of 5 · Day ${v.day}</div>
+                <div class="video-hook">${v.hook}</div>
+                <div class="video-desc">${v.desc}</div>
+              </div>
+              <div class="video-day">Day ${v.day}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      section.appendChild(card);
+    });
+
+    container.appendChild(section);
+  });
+}
+
+// Init
+renderTools();
+updateProgress();
+</script>
+</body>
+</html>
